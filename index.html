@@ -637,7 +637,7 @@ async function saveProd(){
   btn.disabled=true;btn.textContent='⏳ جار الحفظ...';
   try{
     showSaving();
-    const res=await fetch(AS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:eid?'update':'add',id,nameAr:ar,nameEn:en,price,oldPrice:old,qty,category:cat,descAr:dar,descEn:den,tags,images})});
+    const res=await fetch(AS_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:eid?'update':'add',id,nameAr:ar,nameEn:en,price,oldPrice:old,qty,category:cat,descAr:dar,descEn:den,tags,images})});
     const json=await res.json();
     hideSaving();
     if(json.success!==false){showToast(eid?'✅ تم تحديث المنتج':'✅ تم إضافة المنتج بنجاح');clearForm();await loadProds(false);}
@@ -671,7 +671,7 @@ async function delProd(id){
   if(!confirm('هل تريد حذف هذا المنتج نهائياً؟'))return;
   try{
     showSaving();
-    const res=await fetch(AS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',id})});
+    const res=await fetch(AS_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'delete',id})});
     const json=await res.json();hideSaving();
     if(json.success!==false){showToast('✅ تم حذف المنتج');await loadProds(false);}
     else showToast('❌ فشل الحذف');
